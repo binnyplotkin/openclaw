@@ -14,6 +14,7 @@ mkdir -p /tmp/workspace
 cat > /tmp/.openclaw/openclaw.json << EOF
 {
   "gateway": {
+    "mode": "local",
     "port": ${PORT:-8080},
     "bind": "lan",
     "auth": {
