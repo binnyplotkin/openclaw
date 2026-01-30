@@ -1,16 +1,15 @@
 #!/bin/sh
 set -e
 
-# Create dirs if they don't exist (first run)
-mkdir -p /data/.openclaw 2>/dev/null || true
-mkdir -p /data/workspace 2>/dev/null || true
+# Use /tmp for config (always writable)
+export OPENCLAW_STATE_DIR=/tmp/.openclaw
+export OPENCLAW_WORKSPACE_DIR=/tmp/workspace
 
-# Remove only the config file (not the directory)
-rm -f /data/.openclaw/openclaw.json 2>/dev/null || true
-rm -f /data/.openclaw/gateway-token 2>/dev/null || true
+mkdir -p /tmp/.openclaw
+mkdir -p /tmp/workspace
 
 # Create fresh config with the gateway token from env
-cat > /data/.openclaw/openclaw.json << EOF
+cat > /tmp/.openclaw/openclaw.json << EOF
 {
   "gateway": {
     "token": "${OPENCLAW_GATEWAY_TOKEN}",
@@ -18,7 +17,7 @@ cat > /data/.openclaw/openclaw.json << EOF
     "bind": "lan",
     "authMode": "token"
   },
-  "workspace": "/data/workspace"
+  "workspace": "/tmp/workspace"
 }
 EOF
 
