@@ -12,10 +12,11 @@ mkdir -p /tmp/workspace
 cat > /tmp/.openclaw/openclaw.json << EOF
 {
   "gateway": {
-    "token": "${OPENCLAW_GATEWAY_TOKEN}",
     "port": ${PORT:-8080},
     "bind": "lan",
-    "authMode": "token"
+    "auth": {
+      "token": "${OPENCLAW_GATEWAY_TOKEN}"
+    }
   },
   "workspace": "/tmp/workspace"
 }
