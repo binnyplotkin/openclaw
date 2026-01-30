@@ -14,6 +14,7 @@ echo "=== Running onboard wizard ==="
 # Run onboard in non-interactive mode
 node dist/index.js onboard \
   --non-interactive \
+  --accept-risk \
   --mode local \
   --auth-choice apiKey \
   --gateway-port ${PORT:-8080} \
