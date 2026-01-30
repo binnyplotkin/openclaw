@@ -1,0 +1,6 @@
+{
+  "build": {},
+  "deploy": {
+    "startCommand": "openclaw gateway --port $PORT --bind 0.0.0.0"
+  }
+}
