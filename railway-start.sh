@@ -17,8 +17,7 @@ cat > /tmp/.openclaw/openclaw.json << EOF
     "auth": {
       "token": "${OPENCLAW_GATEWAY_TOKEN}"
     }
-  },
-  "workspace": "/tmp/workspace"
+  }
 }
 EOF
 
