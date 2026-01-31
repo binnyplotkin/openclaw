@@ -2,6 +2,8 @@
 set -e
 
 export HOME=/tmp
+export OPENCLAW_STATE_DIR=/tmp/.openclaw
+export OPENCLAW_WORKSPACE_DIR=/tmp/workspace
 
 mkdir -p /tmp/.openclaw
 mkdir -p /tmp/workspace
