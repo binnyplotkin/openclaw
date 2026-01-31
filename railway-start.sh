@@ -43,5 +43,5 @@ echo "=== Config file contents ==="
 cat "$HOME/.openclaw/openclaw.json" 2>/dev/null || echo "No config file found"
 echo "=== End config ==="
 
-# Start the gateway
-exec node dist/index.js gateway --port ${PORT:-8080} --bind lan
+# Start the gateway with token passed directly
+exec node dist/index.js gateway --port ${PORT:-8080} --bind lan --token "${OPENCLAW_GATEWAY_TOKEN}"
