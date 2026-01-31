@@ -24,22 +24,23 @@ node dist/index.js onboard \
 
 echo "=== Onboard complete, updating token ==="
 
-# Update the token in config if it exists
-if [ -f /tmp/.openclaw/openclaw.json ]; then
-  # Use node to update the token since we don't have jq
+# Update the token in the config file (onboard writes to $HOME/.openclaw/)
+CONFIG_FILE="$HOME/.openclaw/openclaw.json"
+if [ -f "$CONFIG_FILE" ]; then
   node -e "
     const fs = require('fs');
-    const config = JSON.parse(fs.readFileSync('/tmp/.openclaw/openclaw.json', 'utf8'));
+    const configPath = process.env.HOME + '/.openclaw/openclaw.json';
+    const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
     config.gateway = config.gateway || {};
     config.gateway.auth = config.gateway.auth || {};
     config.gateway.auth.token = process.env.OPENCLAW_GATEWAY_TOKEN;
-    fs.writeFileSync('/tmp/.openclaw/openclaw.json', JSON.stringify(config, null, 2));
-    console.log('Token updated in config');
+    fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
+    console.log('Token updated in config at: ' + configPath);
   "
 fi
 
 echo "=== Config file contents ==="
-cat /tmp/.openclaw/openclaw.json 2>/dev/null || echo "No config file found"
+cat "$HOME/.openclaw/openclaw.json" 2>/dev/null || echo "No config file found"
 echo "=== End config ==="
 
 # Start the gateway
